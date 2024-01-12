@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 2.8.3)
-project(mpc_differential_drive)
+project(eso_differential_drive)
 
 find_package(catkin REQUIRED COMPONENTS
   gazebo_ros
@@ -22,6 +22,6 @@ include_directories(
   ${catkin_INCLUDE_DIRS}
 )
 
-add_executable(mpc src/mpc.cpp)
-target_link_libraries(mpc ${catkin_LIBRARIES})
-add_dependencies(mpc trajectory_tracking_generate_messages_cpp)
+add_executable(ESO src/ESO.cpp)
+target_link_libraries(ESO ${catkin_LIBRARIES})
+add_dependencies(ESO trajectory_tracking_generate_messages_cpp)

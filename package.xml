@@ -1,13 +1,13 @@
 <?xml version="1.0"?>
 <package format="2">
-  <name>mpc_differential_drive</name>
-  <version>0.0.0</version>
+  <name>eso_differential_drive</name>
+  <version>0.0.1</version>
   <description>
-  ROS package for MPC controller for gazebo simulation
+  ROS package for EESOBC controller for gazebo simulation
   </description>
 
-  <maintainer email="jashmehta20@gmail.com"> Jash Mehta </maintainer>
-  <author email="jashmehta20@gmail.com">Jash Mehta</author>
+  <maintainer email="qinbi152@gmail.com"> Bo qin </maintainer>
+  <author email="qinbi152@gmail.com">Bo qin</author>
 
   <license>TODO</license>
   

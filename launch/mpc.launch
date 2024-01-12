@@ -1,8 +1,0 @@
-<?xml version="1.0"?>
-
-<launch>
-    <node pkg = "mpc_differential_drive" name = "main" type = "main.py">
-    </node>
-    <node pkg = "mpc_differential_drive" name = "mpc" type = "mpc">
-    </node>
-</launch>

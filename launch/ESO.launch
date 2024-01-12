@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+
+<launch>
+    <node pkg = "eso_differential_drive" name = "main" type = "main.py">
+    </node>
+    <node pkg = "eso_differential_drive" name = "ESO" type = "ESO">
+    </node>
+</launch>
