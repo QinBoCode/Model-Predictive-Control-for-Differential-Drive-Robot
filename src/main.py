@@ -89,8 +89,8 @@ def plot_error(i):
     th.append(float(err.theta))
     s.append(float(t))
 
-    ax2.plot(s ,xe,'k',label=r"$x_e$" ,lw=2)  
-    ax2.plot(s ,ye,'r',label=r"$y_e$" ,lw=2)  
+    ax2.plot(s ,xe,'k',label=r"$x_e$" ,lw=2)
+    ax2.plot(s ,ye,'r',label=r"$y_e$" ,lw=2)
     ax2.plot(s ,th,'b',label=r'$\theta_e$' ,lw=2) 
 
     ax2.grid(True)
@@ -103,9 +103,9 @@ if __name__ == '__main__':
 
     # initialization of ROS node
     rospy.init_node('back_cir', anonymous=True) #make node 
-    sub = rospy.Subscriber("/odom", Odometry, pose_callback, queue_size=10000)
-    sub1 = rospy.Subscriber("/desired_traj_pub", Pose2D, desired_callback, queue_size=10000)
-    sub2 = rospy.Subscriber("/errors_pub", Pose2D, errors_callback, queue_size=10000)
+    sub = rospy.Subscriber("/odom", Odometry, pose_callback, queue_size=1000)
+    sub1 = rospy.Subscriber("/desired_traj_pub", Pose2D, desired_callback, queue_size=1000)
+    sub2 = rospy.Subscriber("/errors_pub", Pose2D, errors_callback, queue_size=1000)
 
     fig1 = plt.figure()
     fig2 = plt.figure()
@@ -117,9 +117,8 @@ if __name__ == '__main__':
     ax2.set_ylabel("Errors")
     ax2.set_xlabel("Time in seconds")
 
-    ani1 = animation.FuncAnimation(fig1, plot_traj, interval=10)
-    ani2 = animation.FuncAnimation(fig2, plot_error, interval=10)
-    # plt.legend(handles = [ax1,ax2])
+    ani1 = animation.FuncAnimation(fig1, plot_traj, interval=100)
+    ani2 = animation.FuncAnimation(fig2, plot_error, interval=100)
     plt.show()
     rospy.spin()
 

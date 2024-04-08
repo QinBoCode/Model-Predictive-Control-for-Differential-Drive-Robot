@@ -1,17 +1,4 @@
-# Error Tracking Model Predictive Control for Differential Drive Mobile Robots
-
-
-## Installation
-
-1- Clone the repository in catkin_workspace
-```shell
-    git clone https://github.com/jashmehta20/Model-Predictive-Control-for-Differential-Drive-Robot.git
-```
-2- Perform catkin_make 
-```shell
-    cd ..
-    catkin_make
-```
+# Error Tracking ESOBC for Differential Drive Mobile Robots
 
 ## How To Run
 
@@ -22,11 +9,11 @@
 ```
 2- in the first terminal
 ```shell
-    roslaunch mpc_differential_drive gazebo_mpc.launch
+    roslaunch eso_differential_drive gazebo_eso.launch
 ```
 3- in the second terminal
 ```shell
-    roslaunch mpc_differential_drive mpc.launch
+    roslaunch eso_differential_drive ESO.launch
 ```
 
 ## Results

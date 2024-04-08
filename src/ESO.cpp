@@ -21,7 +21,7 @@ geometry_msgs::Twist vel_msg;
 
 double vel_desired,angular_desired,vel_robot,angular_robot,u1,u2,saturation_sigma,t,ts;
 double a,b,ep;
-double k = 8;
+double k = 5;
 double h = 0.1;
 double xd,yd,xdd,ydd;
 double xh,yh,uu1 = 0,uu2 = 0;
@@ -53,7 +53,7 @@ int main(int argc, char **argv)
     robot_vel_pub = n.advertise <geometry_msgs::Twist> ("/cmd_vel",1000);
 	errors_pub = n.advertise <geometry_msgs::Pose2D> ("/errors_pub",1000);
 	desired_traj_pub = n.advertise <geometry_msgs::Pose2D> ("/desired_traj_pub",1000);
-	ros::Rate loop_rate(100); // 10Hz
+	ros::Rate loop_rate(10); // 10Hz
 
 	// All subscribers have to start
 	while (errors_pub.getNumSubscribers() == 0 || desired_traj_pub.getNumSubscribers() == 0 
@@ -63,7 +63,7 @@ int main(int argc, char **argv)
 	}
 
 	t = 0.0;
-	ts = 0.01;				// Sampling time 
+	ts = 0.1;				// Sampling time 
 
 	VectorXd u_ref(2),uf(2),e(3),c(2),Bcc(2),Lcc(2),bar_x(2),bar_y(2),U(2);
 	
@@ -110,7 +110,7 @@ int main(int argc, char **argv)
 		Acc << 0,1,
 		       0,0;
 		Bcc << 1,0;
-		Lcc << 80,0.1;
+	Lcc << 5,0.001;
 		bar_x += ts * (Acc * bar_x + Bcc * uu1 + Lcc * (xh - bar_x(0)- qd.x - h * cos(qd.theta)));
 		bar_y += ts * (Acc * bar_y + Bcc * uu2 + Lcc * (yh - bar_y(0)- qd.y - h * sin(qd.theta)));
 		// controller design
@@ -138,8 +138,13 @@ int main(int argc, char **argv)
 		c = P * U;
 		vel_robot = c(0);
 		angular_robot = c(1);
-
-
+	if (t>=20 && t <= 40)
+	{vel_robot += 0.3;
+	}
+	
+	if (t>= 25 && t<= 35)
+	{angular_robot += 0.5;
+	}
 		// Saturation to prevent slipping 
 		saturation_sigma = std::max((fabs(vel_robot)/max_vel_robot),std::max((fabs(angular_robot)/max_angular_robot),1.0));
 
@@ -169,10 +174,11 @@ int main(int argc, char **argv)
 		vel_msg.angular.y = 0;
 		vel_msg.angular.z =u2;
 		robot_vel_pub.publish(vel_msg);
-		t = t + 0.01;
+		t = t + 0.1;
 
 		ros::spinOnce();
-		loop_rate.sleep();		
+		loop_rate.sleep();	
+
 	}
 
 		vel_msg.linear.x = 0;
