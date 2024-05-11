@@ -112,7 +112,7 @@ if __name__ == '__main__':
     ax1 = fig1.add_subplot(111)
     ax2 = fig2.add_subplot(111)
     ax1.set_ylabel("Y Coordinates")
-    ax1.set_xlabel("X coordinates")
+    ax1.set_xlabel("X Coordinates")
 
     ax2.set_ylabel("Errors")
     ax2.set_xlabel("Time in seconds")
